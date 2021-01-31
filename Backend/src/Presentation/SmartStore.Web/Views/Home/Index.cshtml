@@ -1,0 +1,325 @@
+﻿@model HomeModel
+@using SmartStore.Web.Models.Home
+@{
+	Layout = "_Layout";
+	var Package = Model.plans.FirstOrDefault();
+}
+
+<div class="headerbg">
+	<div class="header" style="background-image: url('theme/images/newimg/homebanner.jpg');z-index:3;">
+		<div class="pagewidth homebanner">
+			@*<div class="row">
+				<div class="col-md-4">
+					<div class="btcoinbox">
+						<div id="outer-circle">
+							<div id="inner-circle">
+								<div id="center-circle">
+									<div id="content"></div>
+								</div>
+							</div>
+						</div>
+						<div id="bitcoin">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 width="200px" height="200px" viewBox="100 100 400 400" xml:space="preserve">
+							<filter id="dropshadow" height="130%">
+							<feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+
+							<feOffset dx="0" dy="0" result="offsetblur" />
+
+							<feFlood flood-color="red" />
+
+							<feComposite in2="offsetblur" operator="in" />
+
+							<feMerge>
+							<feMergeNode />
+
+							<feMergeNode in="SourceGraphic" />
+
+		</feMerge>
+		</filter>
+							<path class="path" style="filter:url(#dropshadow)" fill="#000000" d="M446.089,261.45c6.135-41.001-25.084-63.033-67.769-77.735l13.844-55.532l-33.801-8.424l-13.48,54.068
+			c-8.896-2.217-18.015-4.304-27.091-6.371l13.568-54.429l-33.776-8.424l-13.861,55.521c-7.354-1.676-14.575-3.328-21.587-5.073
+			l0.034-0.171l-46.617-11.64l-8.993,36.102c0,0,25.08,5.746,24.549,6.105c13.689,3.42,16.159,12.478,15.75,19.658L208.93,357.23
+			c-1.675,4.158-5.925,10.401-15.494,8.031c0.338,0.485-24.579-6.134-24.579-6.134l-9.631,40.468l36.843,9.188
+			c8.178,2.051,16.209,4.19,24.098,6.217l-13.978,56.17l33.764,8.424l13.852-55.571c9.235,2.499,18.186,4.813,26.948,6.995
+			l-13.802,55.309l33.801,8.424l13.994-56.061c57.648,10.902,100.998,6.502,119.237-45.627c14.705-41.979-0.731-66.193-31.06-81.984
+			C425.008,305.984,441.655,291.455,446.089,261.45z M368.859,369.754c-10.455,41.983-81.128,19.285-104.052,13.589l18.562-74.404
+			C306.28,314.65,379.774,325.975,368.859,369.754z M379.302,260.846c-9.527,38.187-68.358,18.781-87.442,14.023l16.828-67.489
+			C327.767,212.14,389.234,221.02,379.302,260.846z" />
+
+
+
+		</svg>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<p style="text-align: center;font-size: 60px;margin-top: 0px;">
+						<img src="~/images/launch.png" width="100" /> Launch Date <img src="~/images/launch.png" width="100" />
+					</p>
+					<p id="demo" class="timer" style="text-align: center;font-size: 60px;margin-top: 0px;"></p>
+					<div class="headertexts" style="margin-top:60px;">
+						Fully auto payment Blockchain Matrix, No admin involved.<br />
+						<br />Super fast way to convert $20 to 130$ again and again!
+					</div>
+
+				</div>
+
+			</div>*@
+			@*@DateTime.Now*@
+
+		</div>
+	</div>
+</div>
+<!-- Home -->
+@*<div class="whitebg">
+		<div class="pagewidth">
+			<div class="padding40">
+				<div class="ourtitles">Our <b style="color: #ffda44;">Fast Plan</b></div>
+				<div style="text-align: center;"><img src="~/Content/theme/images/newimg/yellowborder.jpg" /></div>
+				<div style="height: 30px;"></div>
+				<div class="borderbox">
+					<div class="blueleftbox">
+						<div class="boxinround">
+							100%
+						</div>
+						<div class="afetrtexts">Profit guaranteed</div>
+					</div>
+					<div class="refcomissonbox">
+						<div class="iconox"><img src="~/Content/theme/images/newimg/dollar-symbol-2.svg" style="width:80px;" /></div>
+
+						<div>
+							$20 to Start<br />
+						</div>
+					</div>
+					<div class="refcomissonbox">
+						<div class=""><img src="~/Content/theme/images/newimg/coins-money-stack.svg" style="width:80px;" /></div>
+
+						<div>
+							Unlimited Income<br />
+							<b></b>
+						</div>
+					</div>
+				</div>
+
+				<div style="height: 50px;"></div>
+				<div class="boxsizing">
+					<div class="pagewidth">
+						<div class="row">
+							<div class="col-sm-11">
+								<div class="ourtitles" style="text-align: center">Welcome To <b style="color: #ffda44;">@ViewBag.SiteName</b></div>
+								<div style="text-align: center;"><img src="~/Content/theme/images/newimg/yellowborder.jpg" /></div>
+								<div class="welcometexts text-center">
+									@ViewBag.SiteName is a Straight Line cycler which needs only 3 direct referral to make you rolling again and again with $130.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="height: 40px;">
+					<div class="welcometexts text-center">
+						You've just discovered the ultimate system that will automatically pay you cash!
+					</div>
+				</div>
+				<div class="ourtitles">How <b style="color: #ffda44;">it works ?</b></div>
+				<div class="row">
+					<div class="col-md-6" style="text-align:center;">
+						<div class="ourtitles">You<b style="color: #ffda44;"> Start with $20</b></div>
+						<div style="text-align: center;"><img src="~/images/img_firstlevel.png" style="max-width:100%;" /></div>
+						<div class="col-md-12">
+							<div class="listrights">
+								<ul>
+									<li>Its a 3x1 team build</li>
+									<li>3 member required to complete</li>
+									<li>You get paid $10</li>
+									<li>Free entry to 50$ matrix</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style="text-align:center;">
+						<div class="ourtitles">Free<b style="color: #ffda44;">  $50 3x1 Matrix</b></div>
+						<div style="text-align: center;"><img src="~/images/img_firstlevel.png" style="max-width:100%;" /></div>
+						<div class="col-md-12">
+							<div class="listrights">
+								<ul>
+									<li>Its a 3x1 team build</li>
+									<li>Your 3 previous referral when complete 20$ matrix</li>
+									<li>You get paid $130</li>
+									<li>Free entry to $20 Matrix</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="height: 20px;"></div>
+				<div class="ourtitles">Our<b style="color: #ffda44;"> Statistics</b></div>
+				<div style="text-align: center;"><img src="~/Content/theme/images/newimg/yellowborder.jpg" /></div>
+				<div style="height: 20px;"></div>
+				<div class="boxsizing">
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+							<div class="dateboxmains">
+								<div class="datelefts"><img src="~/Content/theme/images/newimg/rocket-ship.svg" style="width:60px;" /></div>
+								<div class="dateright">
+									Date We Started : <b> @Model.LaunchDate</b>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<div class="dateboxmains">
+								<div class="datelefts"><img src="~/Content/theme/images/newimg/calender.svg" style="width:60px;" /></div>
+								<div class="dateright">
+									Running Days : <b>@Model.RunningDays</b></b>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<div class="dateboxmains">
+								<div class="datelefts"><img src="~/Content/theme/images/newimg/visitor.svg" style="width:60px;" /></div>
+								<div class="dateright">
+									Visitors Online : <b>@Model.OnlineVistors</b></b>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="height: 40px;"></div>
+				<div class="boxsizing">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="depositboxmains">
+								<div class="latesttitles">10 LAST <span style="color: #ffda44;">Purchase</span></div>
+								@foreach (var deposit in Model.Last10Deposit)
+								{
+									<div class="usearnamebox">
+										<div class="pull-left text" style="width:80px;">@deposit.Email</div>
+										<div class="pull-left text" style="padding-left:120px;">@deposit.TransDate</div>
+										<div class="pull-right imag"><img src="~/Content/theme/images/newimg/icon/0.svg" style="width:20px;" /></div>
+										<div class="pull-right text">@deposit.AmountRaw</div>
+										<div class="clearfix"></div>
+									</div>
+								}
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="depositboxmains">
+								<div class="latesttitles">10 LAST <span style="color: #ffda44;">WITHDRAWALS</span></div>
+								@foreach (var withdrawal in Model.Last10Withdrawal)
+								{
+									<div class="usearnamebox">
+										<div class="pull-left text" style="width:80px;">@withdrawal.Email</div>
+										<div class="pull-left text" style="padding-left:120px;">@withdrawal.TransDate</div>
+										<div class="pull-right imag"><img src="~/Content/theme/images/newimg/icon/0.svg" style="width:20px;" /></div>
+										<div class="pull-right text">@withdrawal.AmountRaw</div>
+										<div class="clearfix"></div>
+									</div>
+								}
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="laihgtgreybox">
+								<div class="whiteboxmainsbox">
+									<div><img src="~/Content/theme/images/newimg/deposit.svg" style="width:80px;" /></div>
+									<div class="totaltexts"><span>TOTAL</span> SALES <span>@Model.TotalSiteDeposit USD</span></div>
+								</div>
+								<div class="whiteboxmainsbox">
+									<div><img src="~/Content/theme/images/newimg/withdraw.svg" style="width:80px;" /></div>
+									<div class="totaltexts"><span>TOTAL</span> WITHDRAWALS <span>@Model.TotalSiteWithdrawal USD</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="height: 35px;"></div>
+
+				<div class="whychoosbox">
+					<div class="boxsizing">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="ourtitles" style="text-align: left;">How to Join?</b></div>
+								<div style="text-align: left;"><img src="~/Content/theme/images/newimg/yellowborder.jpg" /></div>
+								<div class="listrights howtoinvest">
+									<ul class="invest-list">
+										<li class="invest-item wow fadeInDown" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInDown;">
+											<div class="invest-item__number">1</div>
+											<div class="invest-item__title">Register.</div>
+											<div class="invest-item__text">
+												To become a member of the project, you need to register. Click on the appropriate button on the page and follow the instructions.
+											</div>
+										</li>
+										<li class="invest-item wow fadeInDown" data-wow-delay="1.1s" style="visibility: visible; animation-delay: 1.1s; animation-name: fadeInDown;">
+											<div class="invest-item__number">2</div>
+											<div class="invest-item__title">Purchase a plan.</div>
+											<div class="invest-item__text">
+												It is very simple to make a purchase – make a purchase by selecting a plan in your personal account.
+											</div>
+										</li>
+										<li class="invest-item wow fadeInDown" data-wow-delay="1.4s" style="visibility: visible; animation-delay: 1.4s; animation-name: fadeInDown;">
+											<div class="invest-item__number">3</div>
+											<div class="invest-item__title">Start earning.</div>
+											<div class="invest-item__text">
+												You will start earning profit within 24 Hours and you can start referring your friends and start earning immediatly
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="whychoosebox">
+									<div class="ourtitles" style="text-align: left;">Why Choose Us?</b></div>
+									<div style="text-align: left;"><img src="~/Content/theme/images/newimg/yellowborder.jpg" /></div>
+									<div class="listrights">
+										<ul>
+											<li>MULTIPLE INCOME</li>
+											<li>FAST WITHDRAWALS</li>
+											<li>OFFICIAL THAILAND REGISTERED COMPANY (12522761)</li>
+											<li>24/7 CUSTOMER SUPPORT SERVICES</li>
+											<li>WORLDWIDE COVERAGE</li>
+											<li>INSTANT DEPOSIT</li>
+											<li>INSTANT WITHDRAWAL</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>*@
+<!-- End Home -->
+
+<script>
+	// Set the date we're counting down to
+	var countDownDate = new Date("Apr 15, 2020 20:00:00").getTime();
+
+	// Update the count down every 1 second
+	var x = setInterval(function () {
+
+		// Get today's date and time
+		var now = new Date().getTime();
+
+		// Find the distance between now and the count down date
+		var distance = countDownDate - now;
+
+		// Time calculations for days, hours, minutes and seconds
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		// Display the result in the element with id="demo"
+		document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+			+ minutes + "m " + seconds + "s ";
+
+		// If the count down is finished, write some text
+		if (distance < 0) {
+			clearInterval(x);
+			document.getElementById("demo").innerHTML = "EXPIRED";
+		}
+	}, 1000);
+</script>

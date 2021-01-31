@@ -1,0 +1,34 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          <strong>Transfer Fund</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="name">Member Email</label>
+                <input type="email" id="email-input" [(ngModel)]="CustomerEmail" name="email-input" class="form-control" placeholder="Enter Email">
+              </div>
+            </div>
+          </div><!--/.row-->
+          
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="name">Enter Amount:</label>
+                <input type="text" class="form-control" [(ngModel)]="Amount" id="name" placeholder="Enter Amount">
+              </div>
+            </div>
+          </div><!--/.row-->
+          <div >
+            <button type="save" (click)="transferfund();" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Transfer Now</button>
+            <button type="cancel" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div><!--/.col-->
+   </div>
+</div>

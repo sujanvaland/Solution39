@@ -1,0 +1,92 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Purchase Matrix Position</strong>
+        </div>
+        <div class="card-body" [hidden]="!showform">
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <label for="ccmonth">Select Phase</label>
+              <select class="form-control" [(ngModel)]="plan">
+                <option *ngFor="let plan of matrixPlan" [ngValue]="plan">{{plan.Name}}</option>
+              </select>
+            </div>
+          </div><!--/.row-->
+          <div>
+            <button type="save" class="btn btn-sm btn-primary" (click)="confirmPayment()" ><i class="fa fa-dot-circle-o"></i> Activate Now</button>
+            <button type="cancel" class="btn btn-sm btn-danger" (click)="reset()"><i class="fa fa-ban"></i> Cancel</button>
+          </div>
+          <section class="bussinessplaninner">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let Phase of Phases">
+                  <div class="plantable {{Phase.TableColor}}">  
+                      <div class="tablettl">
+                          ${{Phase.Cost}} - {{Phase.Name}}
+                          <span class="directbonus float-right">Direct Referral Income ${{Phase.DirectBonus}}</span>
+                      </div>      
+                                      
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead>                              
+                                  <tr>
+                                      <th class="wdth100">Level</th>
+                                      <th  class="wdth100" class="text-center">Member</th>
+                                      <th class="text-center">You get per member ($)</th>
+                                      <th class="text-right">Total Earning ($)</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let level of Phase.Levels">
+                                      <td>Level {{level.LevelNo}}</td>
+                                      <td  class="text-center">{{level.Member}}</td>
+                                      <td  class="text-center">{{level.Commission}}</td>
+                                      <td  class="text-right">{{level.Member * level.Commission}}</td>                                     
+                                  </tr> 
+                                  <tr class="totaldata">
+                                      <td colspan="2">Total Earning</td>  
+                                      <td  class="text-center"></td>                                     
+                                      <td  class="text-right">${{Phase.TotalEarning}}</td>    
+                                  </tr>   
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="card-body" [hidden]="showform">
+          <div>
+            <form action="https://www.coinpayments.net/index.php" target="_blank" method="POST" #form>
+              <input type='hidden' name='cmd' value='_pay_simple'>
+              <input type='hidden' name='reset' value='1'>
+              <input type='hidden' name='merchant' [(ngModel)]="MerchantAcc">
+              <input type='hidden' name='currency' [(ngModel)]="CurrencyCode">
+              <input type='hidden' name='amountf'[(ngModel)]="FinalAmount">
+              <input type='hidden' name='item_name' [(ngModel)]="PaymentMemo">
+              <input type='hidden' name='custom' [(ngModel)]="TransactionId">
+              <input type='hidden' name='on1' [(ngModel)]="plan.Id">
+              <!-- <input type='hidden' name='ipn_url' [(ngModel)]="ipn_url"> -->
+            </form>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label>Position to Activate : {{plan.Name}}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label>Amount :</label>
+                <label>{{CurrencyCode}} {{plan.Price}}</label>
+              </div>
+            </div>
+            <button type="submit" (click)="form.submit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Proceed to Pay</button>
+            <button type="cancel" (click)="reset()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div><!--/.col-->
+   </div>
+  
+</div>

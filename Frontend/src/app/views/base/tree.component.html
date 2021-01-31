@@ -1,0 +1,113 @@
+<!-- <style>
+	#mainContainer {
+		min-width: 850px;
+	}
+
+	.container {
+		text-align: center;
+		margin: 10px .5%;
+		padding: 10px .5%;
+		background: #fff;
+		float: left;
+		overflow: visible;
+		position: relative;
+		max-width:100%;
+	}
+
+
+	.member {
+		
+		position: relative;
+		z-index: 1;
+		cursor: default;
+		border-bottom: solid 1px #000;
+	}
+
+		.member:after {
+			display: block;
+			position: absolute;
+			left: 50%;
+			width: 1px;
+			height: 20px;
+			background: #000;
+			content: " ";
+			bottom: 100%;
+		}
+
+		.member:hover {
+			z-index: 2;
+		}
+
+		.member .metaInfo {
+			display: none;
+			border: solid 1px #000;
+			background: #fff;
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			padding: 5px;
+		}
+
+		.member:hover .metaInfo {
+			display: block;
+		}
+
+		.member .metaInfo img {
+			width: 50px;
+			height: 50px;
+			display: inline-block;
+			padding: 5px;
+			margin-right: 5px;
+			vertical-align: top;
+			border: solid 1px #aaa;
+		}
+</style> -->
+
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          My Team tree
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="ccmonth">Select Phase</label>
+                <select class="form-control" [(ngModel)]="plan" (change)="GetTeam()">
+                  <option value="">Select</option>
+                  <option *ngFor="let plan of matrixPlan" [ngValue]="plan">{{plan.Name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th>Level</th>
+				  <th>Position Required</th>
+				  <th>Position Filled</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let plevel of PhaseDetail">
+                  <td class="text-center">Level {{plevel.Level}}</td>
+				  <td class="text-center">{{plevel.Position}}</td>
+				  <td class="text-center">{{plevel.FilledPosition}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="container" style="text-align: center;">
+            <div class="tf-tree tf-gap-lg" [innerHTML]="TreeViewHTML">
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

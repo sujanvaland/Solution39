@@ -36,11 +36,11 @@ export const navItems: INavData[] = [
   //   url: '/base/myshares',
   //   icon: 'fa fa-dollar'
   // },
-  {
-    name: 'Tree View',
-    url: '/base/tree',
-    icon: 'fa fa-line-chart'
-  },
+  // {
+  //   name: 'Tree View',
+  //   url: '/base/tree',
+  //   icon: 'fa fa-line-chart'
+  // },
   {
     name: 'My Team',
     url: '/base/myteam',
@@ -93,11 +93,11 @@ export const navItems: INavData[] = [
     url: '/base/promotion',
     icon: 'cui-globe'
   },
-  {
-    name: 'Advertisment',
-    url: '/base/marketing',
-    icon: 'cui-globe'
-  },
+  // {
+  //   name: 'Advertisment',
+  //   url: '/base/marketing',
+  //   icon: 'cui-globe'
+  // },
   // {
   //   name: 'Deposit History',
   //   url: '/base/deposithistory',
@@ -112,6 +112,11 @@ export const navItems: INavData[] = [
     name: 'Deposit History',
     url: '/base/purchasehistory',
     icon: 'cui-pie-chart'
+  },
+  {
+    name: 'Account Settings',
+    url: '/base/account',
+    icon: 'cui-pie-settings '
   },
   {
     name: 'Support',

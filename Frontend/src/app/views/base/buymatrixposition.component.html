@@ -6,7 +6,7 @@
           <strong>Purchase Matrix Position</strong>
         </div>
         <div class="card-body" [hidden]="!showform">
-          <div class="row">
+          <div class="row" style="display: none;">
             <div class="form-group col-sm-4">
               <label for="ccmonth">Select Phase</label>
               <select class="form-control" [(ngModel)]="plan">
@@ -16,9 +16,9 @@
           </div><!--/.row-->
           <div>
             <button type="save" class="btn btn-sm btn-primary" (click)="confirmPayment()" ><i class="fa fa-dot-circle-o"></i> Activate Now</button>
-            <button type="cancel" class="btn btn-sm btn-danger" (click)="reset()"><i class="fa fa-ban"></i> Cancel</button>
+            <!-- <button type="cancel" class="btn btn-sm btn-danger" (click)="reset()"><i class="fa fa-ban"></i> Cancel</button> -->
           </div>
-          <section class="bussinessplaninner">
+          <section class="bussinessplaninner" style="display: none;">
             <div class="row">
               <div class="col-md-6" *ngFor="let Phase of Phases">
                   <div class="plantable {{Phase.TableColor}}">  

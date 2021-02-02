@@ -61,8 +61,8 @@ export class BuyMatrixPositionComponent {
       let transactionModel ={
         CustomerId : this.CustomerId,
         NoOfPosition : 1,
-        ProcessorId : 0,
-        PlanId : this.plan.Id
+        ProcessorId : 5,
+        PlanId : 1 //this.plan.Id
       }
 
       $('.loaderbo').show();

@@ -157,8 +157,8 @@ export class DashboardComponent implements OnInit {
               if (timeleft == -1) {
                 clearInterval();
               } else {
-                elem.innerHTML = timeleft + ' more';
-                timeleft--;
+                // elem.innerHTML = timeleft + ' more';
+                // timeleft--;
               }
             }
             if(this.CustomerInfoModel.FullName == null){

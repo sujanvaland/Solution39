@@ -136,6 +136,22 @@ namespace SmartStore.WebApi.Controllers.Api
 
 		#endregion
 
+		[System.Web.Http.HttpGet]
+		[System.Web.Http.ActionName("GetMatrixPlan")]
+		public HttpResponseMessage GetMatrixPlan()
+		{
+			var response = this.Request.CreateResponse(HttpStatusCode.OK);
+			try
+			{
+				var boards = _boardService.GetAllBoards().OrderBy(x => x.Id);
+				return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = boards });
+			}
+			catch (Exception ex)
+			{
+				return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = _localizationService.GetResource("Common.SomethingWentWrong") });
+			}
+		}
+
 		[System.Web.Http.HttpPost]
 		[System.Web.Http.ActionName("BuyPosition")]
 		public HttpResponseMessage BuyPosition(CustomerPlanModel customerPlanModel)
@@ -221,5 +237,26 @@ namespace SmartStore.WebApi.Controllers.Api
 
 		}
 
+		[System.Web.Http.HttpPost]
+		[System.Web.Http.ActionName("AddTransaction")]
+		public HttpResponseMessage AddTransaction(TransactionModel transactionModel)
+		{
+			var customerguid = Request.Headers.GetValues("CustomerGUID").FirstOrDefault();
+			if (customerguid != null)
+			{
+				var cust = _customerService.GetCustomerByGuid(Guid.Parse(customerguid));
+				if (transactionModel.CustomerId != cust.Id)
+				{
+					return Request.CreateResponse(HttpStatusCode.Unauthorized, new { code = 0, Message = "something went wrong" });
+				}
+			}
+			transactionModel.TransactionDate = DateTime.Now;
+			var transcation = transactionModel.ToEntity();
+			transcation.NoOfPosition = transactionModel.NoOfPosition;
+			transcation.StatusId = (int)Status.Pending;
+			transcation.TranscationTypeId = transactionModel.TranscationTypeId;
+			_transactionService.InsertTransaction(transcation);
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = new { Id = transcation.Id } });
+		}
 	}
 }

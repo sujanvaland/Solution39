@@ -46,18 +46,21 @@
     color: #fff;
 }
 .cardbalance {
-    background:#201D6D !important;
-    border-color: #201D6D !important;
+    background:#000 !important;
+    border-color: #fff !important;
+    padding-bottom: 11px
 }
 
 .cardpinkbalance {
     background:#d32a79 !important;
     border-color: #d32a79 !important;
+    padding-bottom: 11px
 }
 
 .cardbluebalance {
-    background:#0800ff !important;
-    border-color: #0800ff !important;
+    background:#f17238 !important;
+    border-color: #fff !important;
+    padding-bottom: 11px
 }
 
 .cardcustomfooter{
@@ -67,7 +70,7 @@
 }
 
 .cardcustomheader{
-    background:#d32a79 !important;
+    background:#f17238 !important;
     color: #fff !important;
 }
 .bg-primary {

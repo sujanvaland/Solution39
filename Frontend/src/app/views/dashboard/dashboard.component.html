@@ -6,13 +6,24 @@
           <button type="button" class="btn btn-transparent p-0 float-right">
             <i class="icon-location-pin"></i>
           </button>
+          <div class="text-value">{{CustomerInfoModel.AvailableBalance}}$</div>
+          <div class="text-label">Available Balance</div>
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-warning cardbluebalance">
+        <div class="card-body pb-0">
+          <button type="button" class="btn btn-transparent p-0 float-right">
+            <i class="icon-location-pin"></i>
+          </button>
           <div class="text-value">{{CustomerInfoModel.CyclerIncome}}$</div>
           <div class="text-label">Matrix Bonus</div>
         </div>
       </div>
     </div><!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary cardpinkbalance">
+      <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
             <button type="button" class="btn btn-transparent p-0 float-right">
@@ -36,9 +47,19 @@
           <div class="text-label">Unilevel Bonus</div>
         </div>
       </div>
+    </div><!--/.col-->    
+  </div><!--/.row-->
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-info cardbalance">
+        <div class="card-body pb-0">
+          <div class="text-label">BoardReward</div>
+          <div class="text-value">{{CustomerInfoModel.UnilevelEarning}}$</div>
+        </div>
+      </div>
     </div><!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-danger">
+      <div class="card text-white bg-warning cardbluebalance">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
             <button type="button" class="btn btn-transparent p-0 float-right">
@@ -50,16 +71,6 @@
         </div>
       </div>
     </div><!--/.col-->
-  </div><!--/.row-->
-  <div class="row">
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-info cardbalance">
-        <div class="card-body pb-0">
-          <div class="text-label">BoardReward</div>
-          <div class="text-value">{{CustomerInfoModel.UnilevelEarning}}$</div>
-        </div>
-      </div>
-    </div><!--/.col-->   
   </div><!--/.row-->
   <div class="card">
     <div class="card-body cardcustomheader">
@@ -172,9 +183,9 @@
           </strong>
         </div>
         <div class="col-sm-4">
-          <strong>
+          <!-- <strong>
             Time to surf : <div id="divTimer"></div>
-          </strong>
+          </strong> -->
         </div>
       </div>
     </div>
@@ -234,7 +245,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <div [innerHTML]="NewsLetter.Body"></div>
+        <!-- <div [innerHTML]="NewsLetter.Body"></div> -->
+        <div ></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="newsModal.hide()">Close</button>

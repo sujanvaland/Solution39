@@ -6784,7 +6784,8 @@ textarea {
 }
 
 .table tbody tr:nth-of-type(odd) td {
-    background-color: #1e1c2f
+    /* background-color: #1e1c2f */
+    background-color: #fff
 }
 
 .table tbody tr:nth-of-type(odd) td:first-of-type {

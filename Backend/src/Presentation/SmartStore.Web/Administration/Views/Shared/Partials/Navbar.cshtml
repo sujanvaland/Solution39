@@ -99,9 +99,10 @@
 <nav id="sidebar">
 	<div class="sidebar-header">
 		<a class="navbar-brand mx-0 mr-3" href="@Url.Action("Index", "Home", new { area = "Admin" })">
-			@{
-				Html.RenderAction("Logo", "Common", new { area = "" });
-			}
+			@*@{
+			Html.RenderAction("Logo", "Common", new { area = "" });
+		}*@
+			<img src="~/images/logo.png" style="height:70px;width:240px;margin-bottom:-17px;"/>
 		</a>
 	</div>
 	<ul class="list-unstyled components">

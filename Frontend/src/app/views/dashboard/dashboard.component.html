@@ -3,9 +3,6 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
-          <button type="button" class="btn btn-transparent p-0 float-right">
-            <i class="icon-location-pin"></i>
-          </button>
           <div class="text-value">{{CustomerInfoModel.AvailableBalance}}$</div>
           <div class="text-label">Available Balance</div>
         </div>
@@ -14,9 +11,6 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-warning cardbluebalance">
         <div class="card-body pb-0">
-          <button type="button" class="btn btn-transparent p-0 float-right">
-            <i class="icon-location-pin"></i>
-          </button>
           <div class="text-value">{{CustomerInfoModel.CyclerIncome}}$</div>
           <div class="text-label">Matrix Bonus</div>
         </div>
@@ -26,9 +20,6 @@
       <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent p-0 float-right">
-              <i class="icon-settings"></i>
-            </button>
           </div>
           <div class="text-value">{{CustomerInfoModel.DirectBonus}}$</div>
           <div class="text-label">Direct Bonus</div>
@@ -39,9 +30,6 @@
       <div class="card text-white bg-warning cardbluebalance">
         <div class="card-body pb-0">
           <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent p-0 float-right">
-              <i class="icon-settings"></i>
-            </button>
           </div>
         <div class="text-value">{{CustomerInfoModel.UnilevelEarning}}$</div>
           <div class="text-label">Unilevel Bonus</div>
@@ -53,24 +41,11 @@
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
-          <div class="text-label">BoardReward</div>
-          <div class="text-value">{{CustomerInfoModel.UnilevelEarning}}$</div>
+          <div class="text-label"> Pool Bonus</div>
+          <div class="text-value"> {{CustomerInfoModel.PoolShare}}$</div>
         </div>
       </div>
-    </div><!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-warning cardbluebalance">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent p-0 float-right">
-              <i class="icon-settings"></i>
-            </button>
-          </div>
-          <div class="text-value">{{CustomerInfoModel.UnilevelEarning}}$</div>
-          <div class="text-label">LuckyDraw</div>
-        </div>
-      </div>
-    </div><!--/.col-->
+    </div><!--/.col-->    
   </div><!--/.row-->
   <div class="card">
     <div class="card-body cardcustomheader">
@@ -81,7 +56,7 @@
         <div class="col-sm-5">
           <span class="float-right">
             <strong>
-            Affiliate Link : <a target="_blank" href="{{SiteUrl}}/#/?r={{CustomerInfoModel.CustomerId}}">{{SiteUrl}}/#/?r={{CustomerInfoModel.CustomerId}}</a>
+            Affiliate Link : <a target="_blank" href="{{SiteUrl}}/#/?r={{CustomerInfoModel.Name}}">{{SiteUrl}}/#/?r={{CustomerInfoModel.Name}}</a>
             </strong>
           </span>
         </div><!--/.col-->
@@ -162,13 +137,13 @@
       </div>
     </div>
   </div>
-  <div class="card">
+  <!-- <div class="card">
     <div class="card-body cardcustomheader">
       <div class="row">
         <div class="col-sm-5">
           <h4 class="card-title mb-0"><strong>Daily Task</strong></h4>
-        </div><!--/.col-->
-      </div><!--/.row-->
+        </div>
+      </div>
     </div>
     <div class="card-footer cardcustomfooter">
       <div class="row text-center">
@@ -183,13 +158,10 @@
           </strong>
         </div>
         <div class="col-sm-4">
-          <!-- <strong>
-            Time to surf : <div id="divTimer"></div>
-          </strong> -->
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

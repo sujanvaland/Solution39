@@ -15,7 +15,8 @@
             </div>
           </div><!--/.row-->
           <div>
-            <button type="save" class="btn btn-sm btn-primary" (click)="confirmPayment()" ><i class="fa fa-dot-circle-o"></i> Activate Now</button>
+            <button type="save" *ngIf="IsActive" class="btn btn-sm btn-primary" (click)="confirmPayment()" ><i class="fa fa-dot-circle-o"></i> Activate Now</button>
+            <label *ngIf="!IsActive">Your Already Activated Plan</label>
             <!-- <button type="cancel" class="btn btn-sm btn-danger" (click)="reset()"><i class="fa fa-ban"></i> Cancel</button> -->
           </div>
           <section class="bussinessplaninner" style="display: none;">

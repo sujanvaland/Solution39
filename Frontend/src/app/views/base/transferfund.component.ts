@@ -25,7 +25,7 @@ export class TransferFundComponent {
     model.CustomerId = this.CustomerId;
 
     if(model.CustomerEmail == ""){
-      this.toastr.error("Please enter email");
+      this.toastr.error("Please enter User Name");
       return;
     }
     if(model.Amount <= 0){
@@ -43,7 +43,7 @@ export class TransferFundComponent {
           this.toastr.success("Transfer Successfull");
         }
         else{
-          this.toastr.success(res.Message);
+          this.toastr.error(res.Message);
         }
         $('.loaderbo').hide();
       },

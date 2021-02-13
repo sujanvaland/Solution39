@@ -19,7 +19,7 @@ namespace SmartStore.Web.Infrastructure
 			routes.MapLocalizedRoute(
 				"Default_Localized",
 				"{controller}/{action}/{id}",
-				new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+				new { controller = "Customer", action = "Login", id = UrlParameter.Optional },
 				new { controller = new IsKnownController() },
 				new[] { "SmartStore.Web.Controllers" }
 			);
@@ -27,7 +27,7 @@ namespace SmartStore.Web.Infrastructure
 			routes.MapRoute(
 				"Default",
 				"{controller}/{action}/{id}",
-				new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+				new { controller = "Customer", action = "Login", id = UrlParameter.Optional },
 				new { controller = new IsKnownController() },
 				new[] { "SmartStore.Web.Controllers" }
 			);

@@ -348,7 +348,7 @@ namespace SmartStore.WebApi.Controllers.Api
 			{
 				return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "You do not have enough fund" });
 			}
-			var exists = _customerService.GetCustomerByEmail(model.CustomerEmail);
+			var exists = _customerService.GetCustomerByUsername(model.CustomerEmail);
 			if (exists != null)
 			{
 				if (exists.Id > 0)
@@ -381,8 +381,16 @@ namespace SmartStore.WebApi.Controllers.Api
 
 					return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success" });
 				}
+				else
+				{
+					return Request.CreateResponse(HttpStatusCode.OK, new { code = 1, Message = "Enter Valid User Name" });
+				}
 			}
-			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "something went wrong" });
+			else
+			{
+				return Request.CreateResponse(HttpStatusCode.OK, new { code = 1, Message = "Enter Valid User Name" });
+			}
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 1, Message = "something went wrong" });
 		}
 
 		[System.Web.Http.HttpGet]

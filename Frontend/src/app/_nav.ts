@@ -36,11 +36,11 @@ export const navItems: INavData[] = [
   //   url: '/base/myshares',
   //   icon: 'fa fa-dollar'
   // },
-  // {
-  //   name: 'Tree View',
-  //   url: '/base/tree',
-  //   icon: 'fa fa-line-chart'
-  // },
+  {
+    name: 'Board View',
+    url: '/base/tree',
+    icon: 'fa fa-line-chart'
+  },
   {
     name: 'My Team',
     url: '/base/myteam',
@@ -116,7 +116,7 @@ export const navItems: INavData[] = [
   {
     name: 'Account Settings',
     url: '/base/account',
-    icon: 'cui-pie-settings '
+    icon: 'fa fa-gear '
   },
   {
     name: 'Support',

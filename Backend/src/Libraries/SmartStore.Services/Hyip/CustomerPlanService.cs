@@ -52,12 +52,21 @@ namespace SmartStore.Services.Hyip
 
 			_customerPlanRepository.Update(customerPlan);
 		}
+
 		public CustomerPlan GetCustomerPlanById(int customerplanid = 0)
 		{
 			if (customerplanid == 0)
 				return null;
 
 			return _customerPlanRepository.GetByIdCached(customerplanid, "db.customerplan.id-" + customerplanid);
+		}
+
+		public bool GetCustomerPlanByCustomerId(int CustomerId)
+		{
+			if (CustomerId == 0)
+				return false;
+
+			return _customerPlanRepository.Table.Where(e => e.CustomerId == CustomerId).Any();
 		}
 
 		public IPagedList<CustomerPlan> GetAllCustomerPlans(int customerid = 0, int planid = 0, int pageIndex = 0, int pageSize = int.MaxValue, int storeId = 0)

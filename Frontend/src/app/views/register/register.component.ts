@@ -25,9 +25,12 @@ ngOnInit (){
       Email: ['', [Validators.required,Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]],
       Password: ['', [Validators.required,Validators.minLength(5)]],
       ConfirmPassword: ['', [Validators.required,Validators.minLength(5)]],
-      AffliateId: ['', Validators.required],
+      SponsorsName: ['', Validators.required],
+      Name: ['', Validators.required],
+      UserName: ['', Validators.required],
+      Phone:['', Validators.required],
     });
-    
+
     let inviter = "";
     this.route.queryParams
     .subscribe(params => {
@@ -39,7 +42,7 @@ ngOnInit (){
         inviter = localStorage.getItem("inviter");
       }
       if(inviter == null || inviter == undefined || inviter == ""){
-        inviter = "2";
+        inviter = "admin";
         localStorage.setItem("inviter",inviter);
       }
     });
@@ -47,7 +50,7 @@ ngOnInit (){
     this.loginserviceService.GetInviterDetail(inviter).subscribe(
       res =>{
         if(res.Message == "success"){
-          this.register.get('AffliateId').setValue(inviter);
+          this.register.get('SponsorsName').setValue(inviter);
           this.inviterName = res.data.name;
           $('.loaderbo').hide();
         }
@@ -56,8 +59,7 @@ ngOnInit (){
           $('.loaderbo').hide();
         }
       },
-      err => {  
-       
+      err => {
         $('.loaderbo').hide();
       }
     );
@@ -76,8 +78,8 @@ get f() { return this.register.controls; }
         if (this.register.invalid) {
             return;
         }
-        this.register.value.AffliateId = localStorage.getItem("inviter");
-        if(this.register.value.AffliateId > 0){
+        this.register.value.SponsorsName = localStorage.getItem("inviter");
+        if(this.register.value.SponsorsName != null){
 
         }
         else{

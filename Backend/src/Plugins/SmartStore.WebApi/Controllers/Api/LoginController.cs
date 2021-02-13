@@ -233,6 +233,16 @@ namespace SmartStore.WebApi.Controllers.Api
 			{
 				if (ModelState.IsValid)
 				{
+					//try
+					//{
+					//	var addr = new System.Net.Mail.MailAddress(model.Email);
+					//}
+					//catch
+					//{
+					//	model.Username = model.Email;
+					//	model.Email = null;
+					//}
+
 					if (_customerSettings.UsernamesEnabled && model.Username != null)
 					{
 						model.Username = model.Username.Trim();
@@ -407,9 +417,9 @@ namespace SmartStore.WebApi.Controllers.Api
             try
             {
                 string jsonString = "";
-
-                //check whether registration is allowed
-                if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
+				var Sponsors = _customerService.GetCustomerByUsername(model.SponsorsName);
+				//check whether registration is allowed
+				if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
                 {
                     //Registrition Disable
                     //(int)UserRegistrationType.Disabled
@@ -425,7 +435,8 @@ namespace SmartStore.WebApi.Controllers.Api
                 {
                     model.Username = model.Username.Trim();
                 }
-				customer.AffiliateId = model.AffliateId;
+				customer.AffiliateId = Sponsors.Id;
+				customer.SponsorsName = model.SponsorsName;
                 bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
                 var registrationRequest = new CustomerRegistrationRequest(customer, model.Email,
                     _customerSettings.UsernamesEnabled ? model.Username : model.Email, model.Password, _customerSettings.DefaultPasswordFormat, isApproved);
@@ -726,7 +737,7 @@ namespace SmartStore.WebApi.Controllers.Api
 		public HttpResponseMessage GetInviterDetail(string inviter)
 		{
 			var response = this.Request.CreateResponse(HttpStatusCode.OK);
-			var customer = _customerService.GetCustomerById(int.Parse(inviter));
+			var customer = _customerService.GetCustomerByUsername(inviter);
 			if(customer != null)
 			{
 				var CustomerName = customer.GetFullName();

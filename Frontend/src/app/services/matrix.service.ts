@@ -14,6 +14,12 @@ export class MatrixService {
     return this.http.get<any>(url);
   }
 
+  IsActive(CustomerId)
+  {
+    let url = environment.baseApiUrl + "Matrix/IsActive?CustomerId="+CustomerId;
+    return this.http.get<any>(url);
+  }
+
   GetTreeView(PositionId)
   {
     let url = environment.baseApiUrl + "Matrix/GetTreeView?PositionId="+PositionId;

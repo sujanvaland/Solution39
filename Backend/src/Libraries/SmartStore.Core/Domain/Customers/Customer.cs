@@ -44,10 +44,16 @@ namespace SmartStore.Core.Domain.Customers
             this.PasswordFormat = PasswordFormat.Clear;
         }
 
-        /// <summary>
-        /// Gets or sets the customer Guid
-        /// </summary>
-        [DataMember]
+		/// <summary>
+		/// Gets or sets the Sponsors Name identifier
+		/// </summary>
+		[DataMember]
+		public string SponsorsName { get; set; }
+
+		/// <summary>
+		/// Gets or sets the customer Guid
+		/// </summary>
+		[DataMember]
         public Guid CustomerGuid { get; set; }
 
 		/// <summary>

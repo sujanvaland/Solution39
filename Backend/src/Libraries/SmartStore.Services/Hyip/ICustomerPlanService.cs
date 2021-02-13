@@ -14,6 +14,7 @@ namespace SmartStore.Services.Hyip
 		void UpdateCustomerPlan(CustomerPlan customerPlan);
 		void DeleteCustomerPlan(CustomerPlan customerPlan);
 		CustomerPlan GetCustomerPlanById(int customerplanid=0);
+		bool GetCustomerPlanByCustomerId(int CustomerId);
 
 		IPagedList<CustomerPlan> GetAllCustomerPlans(
 			int customerid=0,

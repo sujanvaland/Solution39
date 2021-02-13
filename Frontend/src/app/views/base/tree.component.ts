@@ -14,7 +14,7 @@ export class TreeComponent {
   CustomerId:string;
   CustomerBoard=[];
   matrixPlan = [];
-  plan = { Id : 1,Height:5}
+  plan = { Id : 1,Height:4}
   MyTreeView = [];
   PhaseDetail = [];
   TreeViewHTML:string="";
@@ -42,15 +42,15 @@ export class TreeComponent {
       CustomerId : this.CustomerId
     }
     let phaseid = this.plan.Id;
-    let lastlevel = 1;
+    let positionreq =1;
     this.PhaseDetail =[];
     for (let index = 1; index <= this.plan.Height; index++) {
       this.PhaseDetail.push({
         'Level':index,
-        'Position':lastlevel * 2,
+        'Position':positionreq * 3,
         'FilledPosition':0
       })  
-      lastlevel = 2*lastlevel;
+      positionreq = positionreq * 3;
     }
     this.customerservice.GetCustomerBoard(model).subscribe(
       res => {

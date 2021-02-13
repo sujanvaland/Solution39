@@ -104,10 +104,34 @@
                 <h1>Register</h1>
                 <p class="text-muted">Create your account, Inviter : {{inviterName}}</p>
                 <div class="input-group mb-3">
-                  <input type="text" formControlName="AffliateId" disabled class="form-control" placeholder="Inviter Id" 
-                  [ngClass]="{ 'is-invalid': submitted && f.AffliateId.errors }" />
-                  <div *ngIf="submitted && f.AffliateId.errors" class="invalid-feedback">
-                  <div *ngIf="f.AffliateId.errors.required">Inviter is required</div></div>
+                  <input type="text" formControlName="SponsorsName" class="form-control" placeholder="Sponsors Name" 
+                  [ngClass]="{ 'is-invalid': submitted && f.SponsorsName.errors }" />
+                  <div *ngIf="submitted && f.SponsorsName.errors" class="invalid-feedback">
+                  <div *ngIf="f.SponsorsName.errors.required">Sponsors Name is required</div></div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="Name" class="form-control" placeholder="Name" 
+                  [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                  <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                  <div *ngIf="f.Name.errors.required">Name is required</div>
+                  <div *ngIf="f.Name.errors?.pattern">Special Characters Not Allowed in Name</div>
+                  </div>
+                </div>                
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="Email" class="form-control" placeholder="Email" 
+                  [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+                  <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                  <div *ngIf="f.Email.errors.required">Email is required</div>
+                  <div *ngIf="f.Email.errors?.pattern">Enter Valid Email</div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="Phone" class="form-control" placeholder="Phone" 
+                  [ngClass]="{ 'is-invalid': submitted && f.Phone.errors }" />
+                  <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback">
+                  <div *ngIf="f.Phone.errors.required">Phone is required</div>
+                  <div *ngIf="f.Phone.errors?.pattern">Enter Valid Email</div>
+                  </div>
                 </div>
                 <div class="input-group mb-3">
                   <input type="text" formControlName="UserName" class="form-control" placeholder="User Name" 

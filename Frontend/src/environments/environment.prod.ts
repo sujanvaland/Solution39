@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  siteUrl : "http://108.60.201.193:8082/",
-  baseApiUrl: 'http://108.60.201.193:8083/api/v1/',
+  siteUrl : "http://solution39.net/",
+  baseApiUrl: 'http://api.solution39.net/api/v1/',
   coinPaymentMerAcc : '7abf1e36724948f8dfb5686a3395cbb0',
   withdrawalFees:0.5,
   AllowFund:true,
@@ -19,17 +19,16 @@ export const environment = {
   Managers :[],
   Phases : [
     {
-      Name : "Phase 1",
-      Cost : 10,
+      Name : "Board 1",
+      Cost : 39,
       Levels : [
-        {LevelNo:1,Member:2,Commission:0.5},
-        {LevelNo:2,Member:4,Commission:0.5},
-        {LevelNo:3,Member:8,Commission:0.5},
-        {LevelNo:4,Member:16,Commission:0.5},
-        {LevelNo:5,Member:32,Commission:3},
+        {LevelNo:1,Member:3,Commission:7},
+        {LevelNo:2,Member:9,Commission:4},
+        {LevelNo:3,Member:27,Commission:4},
+        {LevelNo:4,Member:81,Commission:13},
       ],
-      DirectBonus : 2,
-      TotalEarning : 111,
+      DirectBonus : 6.5,
+      TotalEarning : 1218,
       TableColor : "pink"
     },
     {

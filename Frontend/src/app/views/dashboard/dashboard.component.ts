@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   SiteUrl : string = environment.siteUrl;
   CustomerInfoModel = { Status : '', FullName :'',AvailableBalance :0,TotalEarning:0,DirectBonus:0,
   UnilevelEarning : 0,PoolShare:0,GCTInDollar:0,AdCredit:0,CustomerId:0,RegistrationDate:'',
-  CyclerIncome : 0,ServerTime :'',ReferredBy:'',AffilateId:0,NoOfSecondsToSurf:0,NoOfAdsToSurf:0}
+  CyclerIncome : 0,ServerTime :'',ReferredBy:'',AffilateId:0,NoOfSecondsToSurf:0,NoOfAdsToSurf:0,Name:''}
   CustomerBoard = [];
   Managers = [] = environment.Managers;
   Campaigns = [];

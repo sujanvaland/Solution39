@@ -12,6 +12,7 @@ namespace SmartStore.WebApi.Models.Api.Customer
 
         public bool UsernamesEnabled { get; set; }
         public string Username { get; set; }
+		public string SponsorsName { get; set; }
 		public int AffliateId { get; set; }
 		public bool CheckUsernameAvailabilityEnabled { get; set; }
 

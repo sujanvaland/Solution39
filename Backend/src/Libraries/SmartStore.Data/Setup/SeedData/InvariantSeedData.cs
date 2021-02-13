@@ -3910,14 +3910,14 @@ namespace SmartStore.Data.Setup
 						Title = "Welcome to our store",
 						Body = "<p>Online shopping is the process consumers go through to purchase products or services over the Internet. You can edit this in the admin site.</p></p>"
 					},
-				new Topic
-					{
-						SystemName = "LoginRegistrationInfo",
-						IncludeInSitemap = false,
-						IsPasswordProtected = false,
-						Title = "About login / registration",
-						Body = "<p><strong>Not registered yet?</strong></p><p>Create your own account now and experience our diversity. With an account you can place orders faster and will always have a&nbsp;perfect overview of your current and previous orders.</p>"
-					},
+				//new Topic
+				//	{
+				//		SystemName = "LoginRegistrationInfo",
+				//		IncludeInSitemap = false,
+				//		IsPasswordProtected = false,
+				//		Title = "About login / registration",
+				//		Body = "<p><strong>Not registered yet?</strong></p><p>Create your own account now and experience our diversity. With an account you can place orders faster and will always have a&nbsp;perfect overview of your current and previous orders.</p>"
+				//	},
 				new Topic
 					{
 						SystemName = "PrivacyInfo",

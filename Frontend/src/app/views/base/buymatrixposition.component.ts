@@ -27,6 +27,8 @@ export class BuyMatrixPositionComponent {
   matrixPlan = [];
   Phases = {};
   plan = { Id : 1, Price:10, Name:"" };
+  IsActive:boolean = false;
+
   ngOnInit (){
     this.Phases = environment.Phases;
     if(!environment.AllowPurchase){
@@ -50,6 +52,11 @@ export class BuyMatrixPositionComponent {
         }
       }
     );
+
+    this.matrixservice.IsActive(this.CustomerId).subscribe(
+      res => {
+        this.IsActive = res.data;
+      });
   }
 
   confirmPayment(): void {

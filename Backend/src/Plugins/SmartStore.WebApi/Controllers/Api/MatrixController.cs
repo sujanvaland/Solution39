@@ -41,35 +41,35 @@ using SmartStore.Admin;
 
 namespace SmartStore.WebApi.Controllers.Api
 {
-    public class MatrixController : ApiController
-    {
-        #region Fields
-        public Localizer T { get; set; }//Added by Yagnesh 
-        public ICommonServices Services { get; set; }//Added by Yagnesh 
+	public class MatrixController : ApiController
+	{
+		#region Fields
+		public Localizer T { get; set; }//Added by Yagnesh 
+		public ICommonServices Services { get; set; }//Added by Yagnesh 
 		private readonly ICommonServices _services;
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly DateTimeSettings _dateTimeSettings;
-        private readonly ILocalizationService _localizationService;
-        private readonly IWorkContext _workContext;
-        private readonly IStoreContext _storeContext;
-        private readonly ICustomerService _customerService;
-        private readonly IGenericAttributeService _genericAttributeService;
-        private readonly ICustomerRegistrationService _customerRegistrationService;
-        private readonly ITaxService _taxService;
-        private readonly CustomerSettings _customerSettings;
-        private readonly ICurrencyService _currencyService;
-        private readonly IPriceFormatter _priceFormatter;
-        private readonly IPictureService _pictureService;
-        private readonly IOpenAuthenticationService _openAuthenticationService;
-        private readonly IDownloadService _downloadService;
-        private readonly IWebHelper _webHelper;
-        private readonly ICustomerActivityService _customerActivityService;
-        private readonly MediaSettings _mediaSettings;
-        private readonly LocalizationSettings _localizationSettings;
-        private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
-        private readonly PluginMediator _pluginMediator;
-        private readonly IPermissionService _permissionService;
+		private readonly IAuthenticationService _authenticationService;
+		private readonly IDateTimeHelper _dateTimeHelper;
+		private readonly DateTimeSettings _dateTimeSettings;
+		private readonly ILocalizationService _localizationService;
+		private readonly IWorkContext _workContext;
+		private readonly IStoreContext _storeContext;
+		private readonly ICustomerService _customerService;
+		private readonly IGenericAttributeService _genericAttributeService;
+		private readonly ICustomerRegistrationService _customerRegistrationService;
+		private readonly ITaxService _taxService;
+		private readonly CustomerSettings _customerSettings;
+		private readonly ICurrencyService _currencyService;
+		private readonly IPriceFormatter _priceFormatter;
+		private readonly IPictureService _pictureService;
+		private readonly IOpenAuthenticationService _openAuthenticationService;
+		private readonly IDownloadService _downloadService;
+		private readonly IWebHelper _webHelper;
+		private readonly ICustomerActivityService _customerActivityService;
+		private readonly MediaSettings _mediaSettings;
+		private readonly LocalizationSettings _localizationSettings;
+		private readonly ExternalAuthenticationSettings _externalAuthenticationSettings;
+		private readonly PluginMediator _pluginMediator;
+		private readonly IPermissionService _permissionService;
 		private readonly INewsLetterSubscriptionService _newsLetterSubscriptionService;
 		private readonly IBoardService _boardService;
 		private readonly IPlanService _planService;
@@ -84,52 +84,52 @@ namespace SmartStore.WebApi.Controllers.Api
 			ICustomerPlanService customerPlanService,
 			IPlanService planService,
 			ICommonServices services,
-            IAuthenticationService authenticationService,
-            IDateTimeHelper dateTimeHelper,
-            DateTimeSettings dateTimeSettings, TaxSettings taxSettings,
-            ILocalizationService localizationService,
-            IWorkContext workContext, IStoreContext storeContext,
-            ICustomerService customerService,
-            IGenericAttributeService genericAttributeService,
-            ICustomerRegistrationService customerRegistrationService,
-            ITaxService taxService, RewardPointsSettings rewardPointsSettings,
-            CustomerSettings customerSettings, AddressSettings addressSettings, ForumSettings forumSettings,
-            ICurrencyService currencyService,
-            IPriceFormatter priceFormatter,
-            IPictureService pictureService, INewsLetterSubscriptionService newsLetterSubscriptionService,
-            ICustomerActivityService customerActivityService,
-            MediaSettings mediaSettings,
-            LocalizationSettings localizationSettings,
-            ExternalAuthenticationSettings externalAuthenticationSettings,
-            PluginMediator pluginMediator,
-            IPermissionService permissionService,
+			IAuthenticationService authenticationService,
+			IDateTimeHelper dateTimeHelper,
+			DateTimeSettings dateTimeSettings, TaxSettings taxSettings,
+			ILocalizationService localizationService,
+			IWorkContext workContext, IStoreContext storeContext,
+			ICustomerService customerService,
+			IGenericAttributeService genericAttributeService,
+			ICustomerRegistrationService customerRegistrationService,
+			ITaxService taxService, RewardPointsSettings rewardPointsSettings,
+			CustomerSettings customerSettings, AddressSettings addressSettings, ForumSettings forumSettings,
+			ICurrencyService currencyService,
+			IPriceFormatter priceFormatter,
+			IPictureService pictureService, INewsLetterSubscriptionService newsLetterSubscriptionService,
+			ICustomerActivityService customerActivityService,
+			MediaSettings mediaSettings,
+			LocalizationSettings localizationSettings,
+			ExternalAuthenticationSettings externalAuthenticationSettings,
+			PluginMediator pluginMediator,
+			IPermissionService permissionService,
 			IBoardService boardService)
-        {
+		{
 			_planService = planService;
 			_customerPlanService = customerPlanService;
 			_transactionService = transactionService;
 			_services = services;
-            _authenticationService = authenticationService;
-            _dateTimeHelper = dateTimeHelper;
-            _dateTimeSettings = dateTimeSettings;
-            _localizationService = localizationService;
-            _workContext = workContext;
-            _storeContext = storeContext;
-            _customerService = customerService;
-            _genericAttributeService = genericAttributeService;
-            _customerRegistrationService = customerRegistrationService;
-            _taxService = taxService;
-            _customerSettings = customerSettings;
-            _currencyService = currencyService;
-            _priceFormatter = priceFormatter;
-            _pictureService = pictureService;
-            _newsLetterSubscriptionService = newsLetterSubscriptionService;
-            _customerActivityService = customerActivityService;
-            _mediaSettings = mediaSettings;
-            _localizationSettings = localizationSettings;
-            _externalAuthenticationSettings = externalAuthenticationSettings;
-            _pluginMediator = pluginMediator;
-            _permissionService = permissionService;
+			_authenticationService = authenticationService;
+			_dateTimeHelper = dateTimeHelper;
+			_dateTimeSettings = dateTimeSettings;
+			_localizationService = localizationService;
+			_workContext = workContext;
+			_storeContext = storeContext;
+			_customerService = customerService;
+			_genericAttributeService = genericAttributeService;
+			_customerRegistrationService = customerRegistrationService;
+			_taxService = taxService;
+			_customerSettings = customerSettings;
+			_currencyService = currencyService;
+			_priceFormatter = priceFormatter;
+			_pictureService = pictureService;
+			_newsLetterSubscriptionService = newsLetterSubscriptionService;
+			_customerActivityService = customerActivityService;
+			_mediaSettings = mediaSettings;
+			_localizationSettings = localizationSettings;
+			_externalAuthenticationSettings = externalAuthenticationSettings;
+			_pluginMediator = pluginMediator;
+			_permissionService = permissionService;
 			_boardService = boardService;
 
 		}
@@ -152,6 +152,24 @@ namespace SmartStore.WebApi.Controllers.Api
 			}
 		}
 
+		[System.Web.Http.HttpGet]
+		[System.Web.Http.ActionName("IsActive")]
+		public HttpResponseMessage IsActive(int CustomerId)
+		{
+			if (CustomerId != 0)
+			{
+				var customer = _customerService.GetCustomerById(CustomerId);
+				if (customer.Id != 0)
+				{
+					_workContext.CurrentCustomer = customer;
+				}
+			}
+
+			var IsActive = _customerPlanService.GetCustomerPlanByCustomerId(CustomerId);
+
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = IsActive });
+		}
+
 		[System.Web.Http.HttpPost]
 		[System.Web.Http.ActionName("BuyPosition")]
 		public HttpResponseMessage BuyPosition(CustomerPlanModel customerPlanModel)
@@ -166,12 +184,12 @@ namespace SmartStore.WebApi.Controllers.Api
 						var plan = _boardService.GetBoardById(customerPlanModel.PlanId);
 						var repurchasebalance = _customerService.GetAvailableBalance(Customer.Id);
 						var amountreq = Convert.ToInt64(plan.Price) * ((customerPlanModel.NoOfPosition == 0) ? 1 : customerPlanModel.NoOfPosition);
-						
+
 						if (repurchasebalance < amountreq)
 						{
 							return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "You do not have enough balance" });
 						}
-						
+
 						if (customerPlanModel.NoOfPosition <= 0)
 						{
 							return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "Enter correct amount" });
@@ -204,7 +222,7 @@ namespace SmartStore.WebApi.Controllers.Api
 						{
 							ReleaseLevelCommission(plan.Id, Customer);
 						}
-						
+
 						return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success" });
 					}
 					else

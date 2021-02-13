@@ -230,7 +230,7 @@ namespace SmartStore.WebApi.Controllers.Api
 			model.AdCredit = _customerService.GetAvailableCredits(CustomerId).FirstOrDefault().AvailableClick;
 			model.TrafficGenerated = _customerService.GetTrafficGenerated(customer.Id);
 			model.InvestorId = id.ToString();
-			model.Name = customer.GetFullName();
+			model.Name = customer.Username;
 			var ReferredBy = _customerService.GetCustomerById(customer.AffiliateId);
 			model.ReferredBy = ReferredBy.GetFullName();
 			if (model.ReferredBy.IsEmpty())

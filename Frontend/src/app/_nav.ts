@@ -88,11 +88,11 @@ export const navItems: INavData[] = [
   //     }
   //   ]
   // },
-  {
-    name: 'Marketing Tools',
-    url: '/base/promotion',
-    icon: 'cui-globe'
-  },
+  // {
+  //   name: 'Marketing Tools',
+  //   url: '/base/promotion',
+  //   icon: 'cui-globe'
+  // },
   // {
   //   name: 'Advertisment',
   //   url: '/base/marketing',

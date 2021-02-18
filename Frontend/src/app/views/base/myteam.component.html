@@ -38,7 +38,7 @@
       <thead>
         <tr>
           <th>Level</th>
-          <th>Member No</th>
+          <th>User Name</th>
           <th>Email</th>
           <th>Registration Date</th>
           <th>Matrix Paid</th>
@@ -49,7 +49,7 @@
       <tbody>
         <tr *ngFor="let member of teamMembers">
           <td>{{member.LevelId}}</td>
-          <td>{{member.CustomerId}}</td>
+          <td>{{member.UserName}}</td>
           <td>{{member.EmailId}}</td>
           <td>{{member.RegistrationDate | date:'mediumDate'}}</td>
           <td>

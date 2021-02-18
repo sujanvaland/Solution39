@@ -1129,6 +1129,7 @@ namespace SmartStore.Services.Customers
 		}
 		public int LevelId { get; set; }
 		public int CustomerId { get; set; }
+		public string UserName { get; set; }
 		public string EmailId { get; set; }
 		public string ReferredBy { get; set; }
 		public DateTime RegistrationDate { get; set; }

@@ -24,12 +24,13 @@ constructor(private formBuilder: FormBuilder,
   private router: Router) { }
 
 CustomerId:string = localStorage.getItem("CustomerId");
-CustomerInfoModel = { FirstName:'',LastName:'',BitcoinAddress:'',CountryId:0,Gender:'',Enable2FA:false,CustomerId:0,Email:"",ReferredBy:""};
+CustomerInfoModel = { FirstName:'',LastName:'',BitcoinAddress:'',Username:'',CountryId:0,Gender:'',Enable2FA:false,CustomerId:0,Email:"",ReferredBy:""};
 CurrencyCode:string;
 Countries=[];
 Pin2FA = "";
 Is2FAEnableAlready : boolean;
 MemberId = 0;
+Username = "";
 Email = "";
 Inviter = "";
 ngOnInit(): void {
@@ -53,6 +54,7 @@ ngOnInit(): void {
     res => {
       this.CustomerInfoModel = res.data;
       this.MemberId= this.CustomerInfoModel.CustomerId;
+      this.Username= this.CustomerInfoModel.Username;
       this.Email= this.CustomerInfoModel.Email;
       this.Inviter= this.CustomerInfoModel.ReferredBy;
       this.Is2FAEnableAlready = this.CustomerInfoModel.Enable2FA;

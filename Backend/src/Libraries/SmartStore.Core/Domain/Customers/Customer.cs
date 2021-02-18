@@ -45,6 +45,12 @@ namespace SmartStore.Core.Domain.Customers
         }
 
 		/// <summary>
+		/// Gets or sets the Profile Picture
+		/// </summary>
+		[DataMember]
+		public string PlacementUserName { get; set; }
+		
+		/// <summary>
 		/// Gets or sets the Sponsors Name identifier
 		/// </summary>
 		[DataMember]

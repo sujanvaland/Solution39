@@ -23,18 +23,19 @@ export class MyTeamComponent implements OnInit {
       this.CustomerId = localStorage.getItem("CustomerId");
       this.customerService.MyReferral(this.CustomerId,this.LevelId).subscribe(
         res => {
+          console.log(res.data.Data);
           this.teamMembers = res.data.Data;
         },
         err => console.log(err)
       );
-      this.matrixService.GetMatrixPlan().subscribe(
-        res => {
-          this.matrixPlan = res.data;
-          this.plan = this.matrixPlan[0];
-          console.log(this.matrixPlan);
-        },
-        err => console.log(err)
-      );
+      // this.matrixService.GetMatrixPlan().subscribe(
+      //   res => {
+      //     this.matrixPlan = res.data;
+      //     this.plan = this.matrixPlan[0];
+      //     console.log(this.matrixPlan);
+      //   },
+      //   err => console.log(err)
+      // );
   }
 
   GetTeam(){

@@ -9,7 +9,11 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-
+.radiobutton {
+    position: absolute;
+    opacity: 1 !important;
+    pointer-events: visible !important;
+}
 html,
 body {
 	height: 100%;

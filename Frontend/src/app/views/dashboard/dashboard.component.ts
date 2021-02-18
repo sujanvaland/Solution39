@@ -12,12 +12,23 @@ import { MatrixService } from '../../services/matrix.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../services/common.service';
 import { timer } from 'rxjs';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+
+  selectedFile: ImageSnippet;
+
   constructor(
+    //private imageService: ImageService,
     private matrixservice: MatrixService,
     private toastr: ToastrService,
     private customerservice: CustomerService,
@@ -237,4 +248,38 @@ export class DashboardComponent implements OnInit {
   countshare(){
     alert("shared link");
   }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      // this.imageService.uploadImage(this.selectedFile.file).subscribe(
+      //   (res) => {
+        
+      //   },
+      //   (err) => {
+        
+      //   })
+    });
+
+    reader.readAsDataURL(file);
+  }
 }
+
+// export class ImageService {
+
+//   constructor(private http: Http) {}
+
+
+//   public uploadImage(image: File): Observable<Response> {
+//     const formData = new FormData();
+
+//     formData.append('image', image);
+
+//     return this.http.post('/api/v1/image-upload', formData);
+//   }
+// }

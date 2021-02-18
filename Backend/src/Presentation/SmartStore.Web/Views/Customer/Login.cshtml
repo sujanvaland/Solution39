@@ -33,7 +33,7 @@
 							<form action="@ViewContext.HttpContext.Request.RawUrl" method="post">
 								@if (Model.UsernamesEnabled)
 								{
-									<div class="form-group">
+									<div class="form-group" style="color:#000">
 										<div class="input-group-lg has-icon">
 											@Html.TextBoxFor(m => m.Username, new { @class = "username form-control", placeholder = Html.DisplayNameFor(m => m.Username) })
 											<span class="input-group-icon text-muted">

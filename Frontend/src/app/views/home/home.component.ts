@@ -55,9 +55,7 @@ ngOnInit (){
       else{
         this.referralId = localStorage.getItem("inviter");
       }
-      if(this.referralId != "0"){
-        this.commonservice.AddCustomerTraffic(this.referralId).subscribe();
-      }
+    
     });
 
     
@@ -67,6 +65,7 @@ ngOnInit (){
       this.ShowLogin = false;
     }
     let inviter = "";
+    debugger
     this.route.queryParams
     .subscribe(params => {
       if(params.r){
@@ -77,7 +76,7 @@ ngOnInit (){
         inviter = localStorage.getItem("inviter");
       }
       if(inviter == null || inviter == undefined || inviter == ""){
-        inviter = "2";
+        inviter = "admin";
         localStorage.setItem("inviter",inviter);
       }
      

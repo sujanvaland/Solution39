@@ -15,6 +15,13 @@ export class CustomerService {
     return this.http.post<any>(url,null)
   }
 
+  GetCustomerInfoNew(CustomerId)
+  {
+    console.log(CustomerId);
+    let url = environment.baseApiUrl + "Customer/GetCustomerInfoNew?CustomerId="+CustomerId;
+    return this.http.post<any>(url,null)
+  }
+
   UpdateCustomerInfo(CustomerInfoModel)
   {
     

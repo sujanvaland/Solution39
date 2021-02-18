@@ -19,7 +19,7 @@
             <td>{{purchase.Id}}</td>
             <td>{{purchase.FinalAmountRaw}}</td>
             <td>{{purchase.ProcessorName}}</td>
-            <td>{{purchase.TransactionDateString |  date:'mediumDate'}}</td>
+            <td>{{purchase.TransactionDateString}}</td>
             <td>
               <span [ngClass]="{'badge-success': purchase.StatusId == 2,
                                 'badge-danger': purchase.StatusId == 1}" class="badge">{{purchase.TransStatusString}}</span>

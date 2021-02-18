@@ -176,6 +176,7 @@ namespace SmartStore.WebApi.Controllers.Api
 				myReferral.LevelId = x.LevelId;
 				myReferral.CustomerId = x.CustomerId;
 				myReferral.EmailId = x.EmailId;
+				myReferral.UserName = x.UserName;
 				myReferral.AmountInvested = x.AmountInvested + " " + _workContext.WorkingCurrency.CurrencyCode;
 				myReferral.IsPaid = x.IsPaid;
 				myReferral.MatrixPaid = x.MatrixPaid;
@@ -297,6 +298,250 @@ namespace SmartStore.WebApi.Controllers.Api
 			model.Phone = customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone);
 			model.CountryId = customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId);
 			model.FullName = customer.GetFullName();
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = model });
+		}
+
+		[System.Web.Http.HttpGet]
+		[System.Web.Http.ActionName("GetCustomerInfoNew")]
+		public HttpResponseMessage GetCustomerInfoNew(int CustomerId)
+		{
+			var customerguid = Request.Headers.GetValues("CustomerGUID").FirstOrDefault();
+			if (customerguid != null)
+			{
+				var cust = _customerService.GetCustomerByGuid(Guid.Parse(customerguid));
+				if (CustomerId != cust.Id)
+				{
+					return Request.CreateResponse(HttpStatusCode.Unauthorized, new { code = 0, Message = "something went wrong" });
+				}
+			}
+			CustomerInfoModel model = new CustomerInfoModel();
+			var customer = _customerService.GetCustomerById(CustomerId);
+			model.BitcoinAddress = customer.GetAttribute<string>(SystemCustomerAttributeNames.BitcoinAddressAcc);
+			model.PayzaAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PayzaAcc);
+			model.SolidTrustPayAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.SolidTrustPayAcc);
+			model.PayeerAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PayeerAcc);
+			model.PMAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PMAcc);
+			model.AdvanceCashAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.AdvanceCashAcc);
+			model.Enable2FA = customer.GetAttribute<bool>(SystemCustomerAttributeNames.Enable2FA);
+			model.AvailableBalance = _customerService.GetAvailableBalance(customer.Id);
+			model.PendingWithdrawal = _customerService.GetCustomerPendingWithdrawal(customer.Id);
+			model.CompletedWithdrawal = _customerService.GetCustomerCompletedWithdrawal(customer.Id);
+			model.ReferralLink = _storeContext.CurrentStore.Url + "?r=" + customer.Id;
+			var id = customer.Id;
+			model.CompletedWithdrawal = _customerService.GetCustomerCompletedWithdrawal(id);
+			model.PendingWithdrawal = _customerService.GetCustomerPendingWithdrawal(id);
+			model.TotalEarning = _customerService.GetCustomerTotalEarnings(id);
+			model.TotalIncome = model.TotalEarning;
+			model.CyclerIncome = _customerService.GetCustomerCyclerBonus(id);
+			model.DirectBonus = _customerService.GetCustomerDirectBonus(id);
+			model.UnilevelEarning = _customerService.GetCustomerUnilevelBonus(id);
+			model.PoolShare = _customerService.GetCustomerROI(id);// + _customerService.GetRepurchaseROI(id);
+			model.TotalReferral = _customerService.GetCustomerDirectReferral(id).Count();
+			//model.GCTBalance = _customerService.GetCustomerToken(customer.Id);
+			//model.GCTInDollar = model.GCTBalance * float.Parse(System.Configuration.ConfigurationManager.AppSettings["GCTRate"]);
+			model.AdCredit = _customerService.GetAvailableCredits(CustomerId).FirstOrDefault().AvailableClick;
+			model.TrafficGenerated = _customerService.GetTrafficGenerated(customer.Id);
+			model.InvestorId = id.ToString();
+			model.Name = customer.Username;
+			var ReferredBy = _customerService.GetCustomerById(customer.AffiliateId);
+			model.ReferredBy = ReferredBy.GetFullName();
+			if (model.ReferredBy.IsEmpty())
+			{
+				model.ReferredBy = ReferredBy.Email;
+			}
+			model.RegistrationDate = customer.CreatedOnUtc.ToLongDateString();
+			model.ServerTime = DateTime.Now.ToLongTimeString();
+			model.Status = (customer.CustomerPosition.Count() > 0 || customer.CustomerPlan.Count() > 0) ? "Active" : "Inactive";
+			model.AffilateId = customer.AffiliateId;
+			model.VacationModelExpiryDate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.VacationModeExpiryDate).ToShortDateString();
+			model.NextSurfTime = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.NextSurfDate);
+			if (model.NextSurfTime != DateTime.MinValue)
+			{
+				model.NoOfSecondsToSurf = (model.NextSurfTime - DateTime.Now).Seconds;
+			}
+			else
+			{
+				model.NoOfSecondsToSurf = 86400;
+			}
+			var custPositions = _boardService.GetAllPosition(0, customer.Id, false, 0, int.MaxValue).ToList();
+			var cycledPositions = _boardService.GetAllPosition(0, customer.Id, true, 0, int.MaxValue).ToList();
+			var lastsurfeddate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.LastSurfDate);
+
+			if (lastsurfeddate.Date < DateTime.Today)
+			{
+				model.NoOfAdsToSurf = 10;
+			}
+			else
+			{
+				model.NoOfAdsToSurf = customer.GetAttribute<int>(SystemCustomerAttributeNames.NoOfAdsSurfed);
+				int ads = (10 - model.NoOfAdsToSurf);
+				if (ads < 0)
+				{
+					model.NoOfAdsToSurf = 0;
+				}
+				else
+				{
+					model.NoOfAdsToSurf = (10 - model.NoOfAdsToSurf);
+				}
+			}
+			var vacationdate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.VacationModeExpiryDate);
+			if (vacationdate > DateTime.Today)
+			{
+				model.NoOfAdsToSurf = 0;
+			}
+
+			model.CurrencyCode = _workContext.WorkingCurrency.CurrencyCode;
+			var substrans = customer.Transaction.Where(x => x.StatusId == 2 && x.TranscationNote == "subscription").FirstOrDefault();
+			if (substrans != null)
+			{
+				var noOfDays = substrans.NoOfPosition * 30;
+				model.SubscriptionDate = substrans.CreatedOnUtc.AddDays(noOfDays).ToShortDateString();
+			}
+
+			model.CustomerId = customer.Id;
+			model.CustomerGuid = customer.CustomerGuid;
+			model.Username = customer.Username;
+			model.Email = customer.Email;
+			model.Active = customer.Active;
+			model.Gender = customer.GetAttribute<string>(SystemCustomerAttributeNames.Gender);
+			model.FirstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
+			model.LastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
+			model.Phone = customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone);
+			model.CountryId = customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId);
+			model.FullName = customer.GetFullName();
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = model });
+		}
+
+		[System.Web.Http.HttpPost]
+		[System.Web.Http.ActionName("GetCustomerInfoTest")]
+		public HttpResponseMessage GetCustomerInfoTest(int CustomerId)
+		{
+			var customerguid = Request.Headers.GetValues("CustomerGUID").FirstOrDefault();
+			if (customerguid != null)
+			{
+				var cust = _customerService.GetCustomerByGuid(Guid.Parse(customerguid));
+				if (CustomerId != cust.Id)
+				{
+					return Request.CreateResponse(HttpStatusCode.Unauthorized, new { code = 0, Message = "something went wrong" });
+				}
+			}
+			CustomerInfoModel model = new CustomerInfoModel();
+			var customer = _customerService.GetCustomerById(CustomerId);
+			model.BitcoinAddress = customer.GetAttribute<string>(SystemCustomerAttributeNames.BitcoinAddressAcc);
+			model.PayzaAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PayzaAcc);
+			model.SolidTrustPayAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.SolidTrustPayAcc);
+			model.PayeerAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PayeerAcc);
+			model.PMAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.PMAcc);
+			model.AdvanceCashAcc = customer.GetAttribute<string>(SystemCustomerAttributeNames.AdvanceCashAcc);
+			model.Enable2FA = customer.GetAttribute<bool>(SystemCustomerAttributeNames.Enable2FA);
+			model.AvailableBalance = _customerService.GetAvailableBalance(customer.Id);
+			model.PendingWithdrawal = _customerService.GetCustomerPendingWithdrawal(customer.Id);
+			model.CompletedWithdrawal = _customerService.GetCustomerCompletedWithdrawal(customer.Id);
+			model.ReferralLink = _storeContext.CurrentStore.Url + "?r=" + customer.Id;
+			var id = customer.Id;
+			model.CompletedWithdrawal = _customerService.GetCustomerCompletedWithdrawal(id);
+			model.PendingWithdrawal = _customerService.GetCustomerPendingWithdrawal(id);
+			model.TotalEarning = _customerService.GetCustomerTotalEarnings(id);
+			model.TotalIncome = model.TotalEarning;
+			model.CyclerIncome = _customerService.GetCustomerCyclerBonus(id);
+			model.DirectBonus = _customerService.GetCustomerDirectBonus(id);
+			model.UnilevelEarning = _customerService.GetCustomerUnilevelBonus(id);
+			model.PoolShare = _customerService.GetCustomerROI(id);// + _customerService.GetRepurchaseROI(id);
+			model.TotalReferral = _customerService.GetCustomerDirectReferral(id).Count();
+			//model.GCTBalance = _customerService.GetCustomerToken(customer.Id);
+			//model.GCTInDollar = model.GCTBalance * float.Parse(System.Configuration.ConfigurationManager.AppSettings["GCTRate"]);
+			model.AdCredit = _customerService.GetAvailableCredits(CustomerId).FirstOrDefault().AvailableClick;
+			model.TrafficGenerated = _customerService.GetTrafficGenerated(customer.Id);
+			model.InvestorId = id.ToString();
+			model.Name = customer.Username;
+			var ReferredBy = _customerService.GetCustomerById(customer.AffiliateId);
+			model.ReferredBy = ReferredBy.GetFullName();
+			if (model.ReferredBy.IsEmpty())
+			{
+				model.ReferredBy = ReferredBy.Email;
+			}
+			model.RegistrationDate = customer.CreatedOnUtc.ToLongDateString();
+			model.ServerTime = DateTime.Now.ToLongTimeString();
+			model.Status = (customer.CustomerPosition.Count() > 0 || customer.CustomerPlan.Count() > 0) ? "Active" : "Inactive";
+			model.AffilateId = customer.AffiliateId;
+			model.VacationModelExpiryDate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.VacationModeExpiryDate).ToShortDateString();
+			model.NextSurfTime = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.NextSurfDate);
+			if (model.NextSurfTime != DateTime.MinValue)
+			{
+				model.NoOfSecondsToSurf = (model.NextSurfTime - DateTime.Now).Seconds;
+			}
+			else
+			{
+				model.NoOfSecondsToSurf = 86400;
+			}
+			var custPositions = _boardService.GetAllPosition(0, customer.Id, false, 0, int.MaxValue).ToList();
+			var cycledPositions = _boardService.GetAllPosition(0, customer.Id, true, 0, int.MaxValue).ToList();
+			var lastsurfeddate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.LastSurfDate);
+
+			if (lastsurfeddate.Date < DateTime.Today)
+			{
+				model.NoOfAdsToSurf = 10;
+			}
+			else
+			{
+				model.NoOfAdsToSurf = customer.GetAttribute<int>(SystemCustomerAttributeNames.NoOfAdsSurfed);
+				int ads = (10 - model.NoOfAdsToSurf);
+				if (ads < 0)
+				{
+					model.NoOfAdsToSurf = 0;
+				}
+				else
+				{
+					model.NoOfAdsToSurf = (10 - model.NoOfAdsToSurf);
+				}
+			}
+			var vacationdate = customer.GetAttribute<DateTime>(SystemCustomerAttributeNames.VacationModeExpiryDate);
+			if (vacationdate > DateTime.Today)
+			{
+				model.NoOfAdsToSurf = 0;
+			}
+
+			model.CurrencyCode = _workContext.WorkingCurrency.CurrencyCode;
+			var substrans = customer.Transaction.Where(x => x.StatusId == 2 && x.TranscationNote == "subscription").FirstOrDefault();
+			if (substrans != null)
+			{
+				var noOfDays = substrans.NoOfPosition * 30;
+				model.SubscriptionDate = substrans.CreatedOnUtc.AddDays(noOfDays).ToShortDateString();
+			}
+
+			model.CustomerId = customer.Id;
+			model.CustomerGuid = customer.CustomerGuid;
+			model.Username = customer.Username;
+			model.Email = customer.Email;
+			model.Active = customer.Active;
+			model.Gender = customer.GetAttribute<string>(SystemCustomerAttributeNames.Gender);
+			model.FirstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
+			model.LastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
+			model.Phone = customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone);
+			model.CountryId = customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId);
+			model.FullName = customer.GetFullName();
+			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = model });
+		}
+
+
+		[System.Web.Http.HttpPost]
+		[System.Web.Http.ActionName("SaveProfilePicture")]
+		public HttpResponseMessage SaveProfilePicture(int CustomerId)
+		{
+			var customerguid = Request.Headers.GetValues("CustomerGUID").FirstOrDefault();
+			if (customerguid != null)
+			{
+				var cust = _customerService.GetCustomerByGuid(Guid.Parse(customerguid));
+				if (CustomerId != cust.Id)
+				{
+					return Request.CreateResponse(HttpStatusCode.Unauthorized, new { code = 0, Message = "something went wrong" });
+				}
+			}
+			CustomerInfoModel model = new CustomerInfoModel();
+			var customer = _customerService.GetCustomerById(CustomerId);
+			//customer.PlacementUserName = 
+
+
 			return Request.CreateResponse(HttpStatusCode.OK, new { code = 0, Message = "success", data = model });
 		}
 

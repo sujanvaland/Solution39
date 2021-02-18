@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   siteUrl : "http://solution39.net/",
-  baseApiUrl: 'http://api.solution39.net/api/v1/',
+  baseApiUrl: 'https://api.solution39.net/api/v1/',
   coinPaymentMerAcc : '7abf1e36724948f8dfb5686a3395cbb0',
   withdrawalFees:0.5,
   AllowFund:true,

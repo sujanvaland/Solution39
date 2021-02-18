@@ -27,10 +27,9 @@ ngOnInit (){
       ConfirmPassword: ['', [Validators.required,Validators.minLength(5)]],
       SponsorsName: ['', Validators.required],
       Name: ['', Validators.required],
-      UserName: ['', Validators.required],
+      UserName: ['', [Validators.required,Validators.pattern("^[a-zA-Z0-9\s]*$")]],
       Phone:['', Validators.required],
     });
-
     let inviter = "";
     this.route.queryParams
     .subscribe(params => {

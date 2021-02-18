@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SmartStore.Core;
 using SmartStore.Core.Caching;
 using SmartStore.Core.Data;
+using SmartStore.Core.Domain.Boards;
 using SmartStore.Core.Domain.Hyip;
 using SmartStore.Core.Domain.Security;
 using SmartStore.Core.Domain.Stores;
@@ -16,15 +17,18 @@ namespace SmartStore.Services.Hyip
 	public partial class CustomerPlanService : ICustomerPlanService
 	{
 		private readonly IRepository<CustomerPlan> _customerPlanRepository;
+		private readonly IRepository<CustomerPosition> _customerPositionRepository;
 		private readonly IRequestCache _requestCache;
 		private const string CUSTOMERPLANS_PATTERN_KEY = "customerplan.*";
 		public CustomerPlanService(IRepository<CustomerPlan> customerPlanRepository,
 			IRepository<StoreMapping> storeMappingRepository,
+			IRepository<CustomerPosition> customerPositionRepository,
 			IRepository<AclRecord> aclRepository,
 			IWorkContext workContext,
 			IRequestCache requestCache)
 		{
 			_customerPlanRepository = customerPlanRepository;
+			_customerPositionRepository = customerPositionRepository;
 			_requestCache = requestCache;
 		}
 
@@ -66,7 +70,9 @@ namespace SmartStore.Services.Hyip
 			if (CustomerId == 0)
 				return false;
 
-			return _customerPlanRepository.Table.Where(e => e.CustomerId == CustomerId).Any();
+			var Id = _customerPositionRepository.Table.Where(e => e.CustomerId == CustomerId).FirstOrDefault();
+
+			return _customerPositionRepository.Table.Where(e => e.CustomerId == CustomerId).Any();
 		}
 
 		public IPagedList<CustomerPlan> GetAllCustomerPlans(int customerid = 0, int planid = 0, int pageIndex = 0, int pageSize = int.MaxValue, int storeId = 0)

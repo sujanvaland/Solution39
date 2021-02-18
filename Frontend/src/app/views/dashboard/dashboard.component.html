@@ -1,5 +1,82 @@
 <div class="animated fadeIn">
-  <div class="row">
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-6">
+        <div class="col-sm-12">
+          <div class="card text-white bg-info cardbalance">
+            <div class="card-body pb-0">
+              <div class="text-value">Available Balance {{CustomerInfoModel.AvailableBalance}}$</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card text-white bg-warning cardbluebalance">
+            <div class="card-body pb-0">
+              <div class="text-value">Matrix Bonus {{CustomerInfoModel.CyclerIncome}}$</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card text-white bg-info cardbalance">
+            <div class="card-body pb-0">
+              <div class="text-value">Direct Bonus {{CustomerInfoModel.DirectBonus}}$</div>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card text-white bg-warning cardbluebalance">
+            <div class="card-body pb-0">
+              <div class="text-value">Unilevel Bonus {{CustomerInfoModel.UnilevelEarning}}$</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card text-white bg-info cardbalance">
+            <div class="card-body pb-0">
+              <div class="text-value">Pool Bonus {{CustomerInfoModel.PoolShare}}$</div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-6">
+      <table style="color: white;">
+        <tr>
+          <!-- <label class="image-upload-container btn btn-bwm">
+            <span>Select Image</span>
+            <input #imageInput
+                   type="file"
+                   accept="image/*"
+                   (change)="processFile(imageInput)">
+          </label> -->
+          <td style="width: 250px;" colspan="2"><b>Name : </b>{{CustomerInfoModel.FullName}}</td>
+          <td rowspan="4"><img style="height: 200px;width: 200px;margin-left: 30px;" src="assets/img/avatars/6.jpg"></td>
+        </tr>
+        <tr>
+          <td style="width: 250px;" colspan="2"><b>Date of Joining : </b>{{CustomerInfoModel.RegistrationDate}}</td>
+        </tr>
+        <tr>
+          <td style="width: 250px;" colspan="2"><b>Account Status : </b>{{CustomerInfoModel.Status}}</td>
+        </tr>
+        <tr>
+          <td style="width: 250px;" colspan="2"><b>Inviter : </b>{{CustomerInfoModel.ReferredBy}} ({{CustomerInfoModel.AffilateId}})</td>
+        </tr>
+        <tr>
+          <td colspan="3"><b>Affiliate Link : </b><a target="_blank" href="{{SiteUrl}}?r={{CustomerInfoModel.Name}}">{{SiteUrl}}?r={{CustomerInfoModel.Name}}</a></td>
+        </tr>
+        <tr *ngFor="let board of CustomerBoard">
+            <td colspan="3">
+              {{board.BoardName}} - 
+              <strong>{{board.NoOfPositionFilled}}/{{board.NoOfPositionRemaining + board.NoOfPositionFilled}} Completed ({{board.CompletionPer}}%)</strong>
+              <div class="progress progress-xs mt-2">
+                <div class="progress-bar bg-success" role="progressbar" [ngStyle]='{width: board.style}' aria-valuenow="board.CompletionPer" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </td>
+            
+        </tr>
+      </table>
+    </div>
+    <!-- <div class="col-2"><img src="assets/img/avatars/6.jpg"></div> -->
+  </div>
+  <div class="row" style="display: none;">
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
@@ -37,7 +114,7 @@
       </div>
     </div><!--/.col-->    
   </div><!--/.row-->
-  <div class="row">
+  <div class="row" style="display: none;">
     <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-info cardbalance">
         <div class="card-body pb-0">
@@ -47,7 +124,7 @@
       </div>
     </div><!--/.col-->    
   </div><!--/.row-->
-  <div class="card">
+  <div class="card" style="display: none;">
     <div class="card-body cardcustomheader">
       <div class="row">
         <div class="col-sm-7">
@@ -84,7 +161,7 @@
       </div>
     </div>
   </div>
-  <div class="card">
+  <div class="card" style="display: none;">
     <div class="card-body cardcustomheader">
       <div class="row">
         <div class="col-sm-5">

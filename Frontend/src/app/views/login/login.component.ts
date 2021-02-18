@@ -23,7 +23,7 @@ export class LoginComponent  implements OnInit {
 ngOnInit (){
   $('.loaderbo').hide();
     this.login =this.formBuilder.group({
-      Email: ['', [Validators.required,Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]],
+      Email: ['', Validators.required],
       Password:['', Validators.required]
   });
 }

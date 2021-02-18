@@ -233,15 +233,15 @@ namespace SmartStore.WebApi.Controllers.Api
 			{
 				if (ModelState.IsValid)
 				{
-					//try
-					//{
-					//	var addr = new System.Net.Mail.MailAddress(model.Email);
-					//}
-					//catch
-					//{
-					//	model.Username = model.Email;
-					//	model.Email = null;
-					//}
+					try
+					{
+						var addr = new System.Net.Mail.MailAddress(model.Email);
+					}
+					catch
+					{
+						model.Username = model.Email;
+						model.Email = null;
+					}
 
 					if (_customerSettings.UsernamesEnabled && model.Username != null)
 					{
@@ -267,7 +267,7 @@ namespace SmartStore.WebApi.Controllers.Api
 						_shoppingCartService.MigrateShoppingCart(customer, customer);
 						if (customer != null)
 						{
-							var tokenString = GenerateJSONWebToken(_customerSettings.UsernamesEnabled ? customer.Username : customer.Email);
+							var tokenString = GenerateJSONWebToken(customer.Email);
 							_customerActivityService.InsertActivity("PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"), customer);
 							var c = JsonConvert.SerializeObject(customer, new JsonSerializerSettings
 							{
